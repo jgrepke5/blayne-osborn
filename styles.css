@@ -514,9 +514,56 @@ h1, h2, h3, h4, h5, h6 {
    ENDORSEMENTS SECTION
    =================================== */
 .endorsements {
-    padding: 100px 0;
+    padding: 100px 0 50px 0;
     background-color: var(--color-red);
     text-align: center;
+}
+
+.endorsement-featured {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto 50px;
+    flex-wrap: wrap;
+    background-color: var(--color-navy);
+    padding: 40px 50px;
+    border-radius: 8px;
+    border: 3px solid var(--color-white);
+    text-align: left;
+}
+
+.endorsement-featured-by {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-white);
+    margin: 0 0 16px 0;
+}
+
+.endorsement-featured-image {
+    flex-shrink: 0;
+}
+
+.endorsement-featured-image img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--color-white);
+    box-shadow: var(--shadow-lg);
+}
+
+.endorsement-featured .endorsement-quote {
+    flex: 1;
+    min-width: 280px;
+    margin: 0;
+}
+
+.endorsement-featured .endorsement-quote blockquote {
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 .endorsement-quote {
@@ -544,72 +591,137 @@ h1, h2, h3, h4, h5, h6 {
 .endorsement-logos {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 50px;
+    align-items: flex-start;
+    gap: 40px;
     flex-wrap: wrap;
     margin-bottom: 50px;
 }
 
-.endorsement-logo {
+.endorsement-block {
+    width: 200px;
+    text-align: center;
+}
+
+.endorsement-block-image {
+    width: 200px;
+    height: 200px;
     background-color: var(--color-white);
-    padding: 20px 30px;
     border-radius: 8px;
-    min-width: 200px;
-    min-height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    margin-bottom: 16px;
 }
 
-.endorsement-logo img {
-    background-color: transparent;
-}
-
-.endorsement-logo img {
-    max-height: 80px;
+.endorsement-block-image img {
+    max-width: 85%;
+    max-height: 85%;
     width: auto;
+    height: auto;
+    object-fit: contain;
 }
 
-.endorsement-logo.endorsement-logo-dark {
-    background-color: #000000 !important;
-    padding: 10px 20px;
-    min-width: 220px;
+.endorsement-block-title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-white);
+    margin: 0;
+    line-height: 1.3;
 }
 
-.endorsement-logo-lyon {
-    padding: 10px 15px;
-}
-
-.endorsement-logo-lyon img {
-    max-height: 100px;
-}
-
-.endorsement-placeholder {
+.endorsement-block.endorsement-placeholder .endorsement-block-image {
     background-color: var(--color-navy-light);
     border: 2px dashed var(--color-gray);
 }
 
-.endorsement-placeholder span {
+.endorsement-block.endorsement-placeholder .endorsement-block-image span {
     color: var(--color-white);
     font-weight: 600;
+    font-size: 0.95rem;
     text-align: center;
     line-height: 1.4;
 }
 
-.endorsement-image {
-    max-width: 500px;
-    margin: 0 auto;
+/* ===================================
+   SUPPORT POPUP (after form submit)
+   =================================== */
+.support-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.endorsement-image img {
+.support-popup.support-popup-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.support-popup-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.support-popup-content {
+    position: relative;
+    background-color: var(--color-white);
+    color: var(--color-text);
+    max-width: 440px;
+    width: 100%;
+    padding: 36px 32px;
     border-radius: 8px;
     box-shadow: var(--shadow-lg);
+    text-align: center;
 }
 
-.image-caption {
-    color: var(--color-gray);
-    font-size: 0.9rem;
-    margin-top: 15px;
+.support-popup-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: var(--color-gray-dark);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.support-popup-close:hover {
+    color: var(--color-navy);
+    background-color: var(--color-gray-light);
+}
+
+.support-popup-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin: 0 0 16px 0;
+    color: var(--color-navy);
+}
+
+.support-popup-copy {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 24px 0;
+    color: var(--color-text);
+}
+
+.support-popup-donate {
+    display: inline-block;
 }
 
 /* ===================================
@@ -1110,13 +1222,23 @@ h1, h2, h3, h4, h5, h6 {
         grid-template-columns: 1fr;
     }
     
+    .endorsement-featured {
+        flex-direction: column;
+        gap: 30px;
+        padding: 30px 24px;
+    }
+
+    .endorsement-featured .endorsement-quote {
+        min-width: 0;
+    }
+
     .endorsement-logos {
         flex-direction: column;
+        align-items: center;
     }
     
-    .endorsement-logo {
-        width: 100%;
-        max-width: 300px;
+    .endorsement-block {
+        max-width: 200px;
     }
     
     .form-row {
