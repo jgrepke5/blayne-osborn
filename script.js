@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
     
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.issue-card, .about-image, .priorities-image, .endorsement-logo');
+    const animateElements = document.querySelectorAll('.issue-card, .about-image, .priorities-image, .endorsement-block');
     animateElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
@@ -93,28 +93,78 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.contact-form');
     if (form) {
         form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
             const phone = document.getElementById('phone');
             const consent = document.getElementById('consent');
-            
+
             // Basic phone validation
             if (phone && phone.value) {
                 const phoneValue = phone.value.replace(/\D/g, '');
                 if (phoneValue.length < 10) {
-                    e.preventDefault();
                     alert('Please enter a valid 10-digit phone number.');
                     phone.focus();
                     return;
                 }
             }
-            
+
             // Consent check
             if (consent && !consent.checked) {
-                e.preventDefault();
                 alert('Please check the consent box to continue.');
                 consent.focus();
                 return;
             }
+
+            // Submit via fetch so we stay on page and show the popup after success
+            var formData = new FormData(form);
+            var submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending…';
+            }
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { Accept: 'application/json' }
+            })
+            .then(function(response) {
+                if (response.ok) {
+                    var popup = document.getElementById('support-popup');
+                    if (popup) {
+                        popup.classList.add('support-popup-visible');
+                        popup.setAttribute('aria-hidden', 'false');
+                    }
+                } else {
+                    return response.json().then(function(data) {
+                        if (data && data.error) alert(data.error);
+                        else alert('Something went wrong. Please try again.');
+                    });
+                }
+            })
+            .catch(function() {
+                alert('Something went wrong. Please try again.');
+            })
+            .finally(function() {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Join the Team';
+                }
+            });
         });
+
+        // Support popup: close on overlay or close button
+        const supportPopup = document.getElementById('support-popup');
+        if (supportPopup) {
+            const overlay = supportPopup.querySelector('.support-popup-overlay');
+            const closeBtn = supportPopup.querySelector('.support-popup-close');
+            function closeSupportPopup() {
+                supportPopup.classList.remove('support-popup-visible');
+                supportPopup.setAttribute('aria-hidden', 'true');
+            }
+            if (overlay) overlay.addEventListener('click', closeSupportPopup);
+            if (closeBtn) closeBtn.addEventListener('click', closeSupportPopup);
+        }
         
         // Phone number formatting
         const phoneInput = document.getElementById('phone');
