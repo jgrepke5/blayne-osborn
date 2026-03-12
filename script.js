@@ -96,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
 
             const phone = document.getElementById('phone');
-            const consent = document.getElementById('consent');
 
             // Basic phone validation
             if (phone && phone.value) {
@@ -106,13 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     phone.focus();
                     return;
                 }
-            }
-
-            // Consent check
-            if (consent && !consent.checked) {
-                alert('Please check the consent box to continue.');
-                consent.focus();
-                return;
             }
 
             // Submit via fetch so we stay on page and show the popup after success
