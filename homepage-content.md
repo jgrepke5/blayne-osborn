@@ -143,11 +143,11 @@ BLAYNE OSBORN WILL KEEP WORKING FOR YOU
 ENDORSED BY
 ```
 
-### Quote Block:
+### Quote Block (Featured — Governor):
 ```
-"[Blayne Osborn] is a strong conservative voice in the Assembly, and his legislative knowledge and expertise will continue to be a great asset."
+Assemblyman Blayne Osborn brings a fresh, energetic perspective rooted in a deep sense of service to Carson City. Blayne is our rural healthcare champion and understands firsthand the unique hurdles facing our rural towns. His expertise in the healthcare field is exactly what we need to ensure that every Nevadan, regardless of their zip code, has access to quality care. Blayne represents the next generation of Nevada leadership, with a strong sense of determination, grit, and knowledge. I am proud to endorse him and am honored to stand with him as we work to build a healthier, stronger Nevada.
 
-— Republican Leader Greg Hafen
+— Governor Joe Lombardo
 ```
 
 ### Endorsement Logos (displayed in row):
