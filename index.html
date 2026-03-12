@@ -213,26 +213,36 @@
     <section class="endorsements" id="endorsements">
         <div class="container">
             <h2 class="section-title section-title-light">Endorsed By</h2>
+            <!-- Featured endorsement: Governor -->
+            <div class="endorsement-featured">
+                <div class="endorsement-featured-image">
+                    <img src="images/governor-headshot.png" alt="Governor Joe Lombardo">
+                </div>
+                <div class="endorsement-quote">
+                    <h3 class="endorsement-featured-by">Governor Joe Lombardo</h3>
+                    <blockquote>
+                        <p>"Assemblyman Blayne Osborn brings a fresh, energetic perspective rooted in a deep sense of service to Carson City. Blayne is our rural healthcare champion and understands firsthand the unique hurdles facing our rural towns. His expertise in the healthcare field is exactly what we need to ensure that every Nevadan, regardless of their zip code, has access to quality care. Blayne represents the next generation of Nevada leadership, with a strong sense of determination, grit, and knowledge. I am proud to endorse him and am honored to stand with him as we work to build a healthier, stronger Nevada."</p>
+                    </blockquote>
+                </div>
+            </div>
             <div class="endorsement-logos">
-                <div class="endorsement-logo">
-                    <img src="images/nevada-assembly-republicans.png" alt="Nevada Assembly Republicans">
+                <div class="endorsement-block">
+                    <div class="endorsement-block-image">
+                        <img src="images/nevada-assembly-republicans.png" alt="Nevada Assembly Republicans">
+                    </div>
+                    <h4 class="endorsement-block-title">Nevada Assembly Republicans</h4>
                 </div>
-                <div class="endorsement-logo endorsement-logo-lyon">
-                    <img src="images/lyon-county-republicans.png" alt="Lyon County Republican Central Committee">
+                <div class="endorsement-block">
+                    <div class="endorsement-block-image">
+                        <img src="images/lyon-county-republicans.png" alt="Lyon County Republican Central Committee">
+                    </div>
+                    <h4 class="endorsement-block-title">Lyon County Republican Central Committee</h4>
                 </div>
-                <div class="endorsement-logo endorsement-placeholder">
-                    <span>Major Endorsements<br>Coming Soon</span>
+                <div class="endorsement-block endorsement-placeholder">
+                    <div class="endorsement-block-image">
+                        <span>Major Endorsements<br>Coming Soon</span>
+                    </div>
                 </div>
-            </div>
-            <div class="endorsement-quote">
-                <blockquote>
-                    <p>"Blayne Osborn has supported Republicans in the legislature since 2009, and his experience could not have been more apparent during his service in Carson City. He is a strong conservative voice in the Assembly, and his legislative knowledge and expertise will continue to be a great asset. He has the full endorsement and support of the Nevada Assembly Republican Caucus."</p>
-                    <cite>— Republican Leader Greg Hafen</cite>
-                </blockquote>
-            </div>
-            <div class="endorsement-image">
-                <img src="images/with-governor.jpg" alt="Blayne Osborn with Governor Joe Lombardo">
-                <p class="image-caption">Assemblyman Osborn with Governor Joe Lombardo</p>
             </div>
         </div>
     </section>
@@ -269,7 +279,7 @@
                         </div>
                         <div class="form-group form-checkbox">
                             <input type="checkbox" id="endorse" name="endorse">
-                            <label for="endorse">I want to Endorse Blayne Osborn.</label>
+                            <label for="endorse">I want to publicly endorse Blayne Osborn.</label>
                         </div>
                         <div class="form-group form-checkbox">
                             <input type="checkbox" id="consent" name="consent" required>
@@ -333,6 +343,10 @@
                     <div class="gallery-caption">Getting Bills Passed with Governor Lombardo</div>
                 </div>
                 <div class="gallery-item">
+                    <img src="images/with-governor.jpg" alt="Blayne Osborn with Governor Joe Lombardo">
+                    <div class="gallery-caption">Assemblyman Osborn with Governor Joe Lombardo</div>
+                </div>
+                <div class="gallery-item">
                     <img src="images/gallery-trump-rally.jpg" alt="Blayne Osborn at a Trump rally">
                     <div class="gallery-caption">Supporting President Trump in Minden</div>
                 </div>
@@ -368,6 +382,10 @@
                 <div class="gallery-item">
                     <img src="images/gallery-health.jpg" alt="Blayne Osborn with Governor Lombardo at bill signing">
                     <div class="gallery-caption">Getting Bills Passed with Governor Lombardo</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/with-governor.jpg" alt="Blayne Osborn with Governor Joe Lombardo">
+                    <div class="gallery-caption">Assemblyman Osborn with Governor Joe Lombardo</div>
                 </div>
                 <div class="gallery-item">
                     <img src="images/gallery-trump-rally.jpg" alt="Blayne Osborn at a Trump rally">
@@ -437,6 +455,17 @@
             </div>
         </div>
     </footer>
+
+    <!-- Thank You / Donate Popup (shown after form submit) -->
+    <div id="support-popup" class="support-popup" aria-hidden="true">
+        <div class="support-popup-overlay"></div>
+        <div class="support-popup-content">
+            <button type="button" class="support-popup-close" aria-label="Close">×</button>
+            <h3 class="support-popup-title">Thank You for Joining the Team!</h3>
+            <p class="support-popup-copy">Your support means the world to Blayne and our campaign. Together we're fighting for rural healthcare, conservative values, and a stronger Nevada. Every contribution—whether time or resources—helps us get there.</p>
+            <a href="https://secure.winred.com/blayne-osborn-for-nevada/donate-today" class="btn btn-primary support-popup-donate" target="_blank" rel="noopener">Donate Now!</a>
+        </div>
+    </div>
 
     <script src="script.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
