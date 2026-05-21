@@ -138,7 +138,8 @@ votingLocations.forEach(function (location) {
         icon: createVotingIcon(location.type)
     }).addTo(map);
 
-    marker.bindPopup(buildVotingPopup(location), { maxWidth: 320 });
+    const popupMaxWidth = window.matchMedia('(max-width: 768px)').matches ? 224 : 320;
+    marker.bindPopup(buildVotingPopup(location), { maxWidth: popupMaxWidth });
     votingMarkers.push({ marker: marker, location: location });
 });
 
@@ -168,3 +169,4 @@ votingMarkers.forEach(function (entry) {
 });
 map.fitBounds(bounds, { padding: [30, 30] });
 map.once('moveend', spreadOverlappingMarkers);
+
