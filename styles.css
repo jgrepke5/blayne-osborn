@@ -1016,13 +1016,87 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 768px) {
     .district-map #map {
-        height: 400px;
+        height: 580px;
+    }
+
+    .map-legend {
+        padding: 8px 10px;
+        font-size: 0.56rem;
+        line-height: 1.3;
+        border-radius: 4px;
+    }
+
+    .map-legend-title {
+        margin-bottom: 6px;
+        font-size: 0.595rem;
+    }
+
+    .map-legend-item {
+        gap: 6px;
+        margin-bottom: 4px;
+    }
+
+    .map-legend-swatch {
+        width: 8px;
+        height: 8px;
+    }
+
+    .voting-popup {
+        font-size: 0.6125rem;
+        line-height: 1.4;
+    }
+
+    .voting-popup-title {
+        margin: 0 0 3px;
+        font-size: 0.7rem;
+    }
+
+    .voting-popup-type {
+        margin: 0 0 6px;
+        font-size: 0.56rem;
+    }
+
+    .voting-popup-address {
+        margin: 0 0 7px;
+    }
+
+    .voting-popup-section {
+        margin-top: 7px;
+    }
+
+    .voting-popup-section strong {
+        margin-bottom: 4px;
+        font-size: 0.56rem;
+    }
+
+    .voting-popup-hours {
+        max-height: 126px;
+    }
+
+    .voting-popup-hours li {
+        margin-bottom: 3px;
+        padding-bottom: 3px;
+    }
+
+    .leaflet-popup-content-wrapper {
+        border-radius: 4px;
+        max-width: 224px !important;
+    }
+
+    .leaflet-popup-content {
+        margin: 8px 10px;
+    }
+
+    .leaflet-popup-close-button {
+        font-size: 18px;
+        width: 22px;
+        height: 22px;
     }
 }
 
 @media (max-width: 480px) {
     .district-map #map {
-        height: 300px;
+        height: 540px;
     }
 }
 
