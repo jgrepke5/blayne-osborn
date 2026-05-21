@@ -996,7 +996,14 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     font-size: 1.2rem;
     color: var(--color-gray-dark);
-    margin-bottom: 30px;
+    margin-bottom: 12px;
+}
+
+.district-map-note {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--color-gray-dark);
+    margin-bottom: 24px;
 }
 
 #map {
@@ -1017,6 +1024,128 @@ h1, h2, h3, h4, h5, h6 {
     .district-map #map {
         height: 300px;
     }
+}
+
+/* Voting location markers */
+.voting-marker-wrapper {
+    background: transparent;
+    border: none;
+}
+
+.voting-marker {
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--color-white);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.map-legend {
+    background: var(--color-white);
+    padding: 12px 14px;
+    border-radius: 6px;
+    box-shadow: var(--shadow-md);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--color-text);
+}
+
+.map-legend-title {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: var(--color-navy);
+}
+
+.map-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.map-legend-item:last-child {
+    margin-bottom: 0;
+}
+
+.map-legend-swatch {
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+/* Voting location popups */
+.voting-popup {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--color-text);
+}
+
+.voting-popup-title {
+    margin: 0 0 4px;
+    font-size: 1rem;
+    color: var(--color-navy);
+}
+
+.voting-popup-type {
+    margin: 0 0 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-gray-dark);
+}
+
+.voting-popup-address {
+    margin: 0 0 10px;
+}
+
+.voting-popup-section {
+    margin-top: 10px;
+}
+
+.voting-popup-section strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--color-navy);
+    font-size: 0.8rem;
+}
+
+.voting-popup-hours {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.voting-popup-hours li {
+    margin-bottom: 4px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--color-gray);
+}
+
+.voting-popup-hours li:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.voting-popup-date {
+    font-weight: 600;
+}
+
+.voting-popup-election {
+    margin: 0;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 6px;
+}
+
+.leaflet-popup-content {
+    margin: 12px 14px;
 }
 
 /* ===================================
