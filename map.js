@@ -1,5 +1,6 @@
 // Initialize the map centered on Assembly District 39 (Lyon/Douglas Counties area)
-const map = L.map('map').setView([39.1, -119.5], 9);
+const map = L.map('map', { zoomSnap: 0.25 }).setView([39.1, -119.5], 9);
+const isMobileMap = window.matchMedia('(max-width: 768px)').matches;
 
 // Add OpenStreetMap tiles (street map style)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -60,8 +61,61 @@ function normalizeDateLabel(date) {
     return date.replace(/\n/g, ' ');
 }
 
-function isClosedVoting(hours) {
-    return /closed/i.test(hours);
+function isClosedHours(hours) {
+    return /closed|no drop\s*-?\s*off/i.test(hours);
+}
+
+function getOpenScheduleEntries(schedule) {
+    return (schedule || []).filter(function (entry) {
+        return !isClosedHours(entry.hours);
+    });
+}
+
+function buildScheduleListHtml(entries) {
+    if (!entries.length) {
+        return '';
+    }
+
+    function renderItem(entry) {
+        return '<li><span class="voting-popup-date">' + entry.date + '</span> ' + entry.hours + '</li>';
+    }
+
+    if (entries.length > 3) {
+        const visible = entries.slice(0, 3);
+        const hidden = entries.slice(3);
+        let html = '<ul class="voting-popup-hours">';
+        visible.forEach(function (entry) {
+            html += renderItem(entry);
+        });
+        html += '</ul>';
+        html += '<details class="voting-popup-details">';
+        html += '<summary class="voting-popup-details-summary">View ' + hidden.length + ' more days</summary>';
+        html += '<ul class="voting-popup-hours">';
+        hidden.forEach(function (entry) {
+            html += renderItem(entry);
+        });
+        html += '</ul></details>';
+        return html;
+    }
+
+    let html = '<ul class="voting-popup-hours">';
+    entries.forEach(function (entry) {
+        html += renderItem(entry);
+    });
+    html += '</ul>';
+    return html;
+}
+
+function buildScheduleSectionHtml(title, schedule) {
+    const openEntries = getOpenScheduleEntries(schedule);
+    if (!openEntries.length) {
+        return '';
+    }
+    return (
+        '<div class="voting-popup-section"><strong>' + title + '</strong>' +
+        buildScheduleListHtml(openEntries) +
+        '</div>'
+    );
 }
 
 function hasVotingOnDate(votingLocation, dateLabel) {
@@ -72,7 +126,7 @@ function hasVotingOnDate(votingLocation, dateLabel) {
     const entry = votingLocation.schedule.find(function (s) {
         return normalizeDateLabel(s.date) === norm;
     });
-    return entry && !isClosedVoting(entry.hours);
+    return entry && !isClosedHours(entry.hours);
 }
 
 function getSupplementalMailSchedule(votingLocation, mailLocation) {
@@ -83,6 +137,9 @@ function getSupplementalMailSchedule(votingLocation, mailLocation) {
         if (/june 9/i.test(entry.date)) {
             return false;
         }
+        if (isClosedHours(entry.hours)) {
+            return false;
+        }
         if (votingLocation.type === 'election-day-only') {
             return true;
         }
@@ -91,15 +148,7 @@ function getSupplementalMailSchedule(votingLocation, mailLocation) {
 }
 
 function buildMailDropoffHtml(schedule) {
-    if (!schedule.length) {
-        return '';
-    }
-    let html = '<div class="voting-popup-section"><strong>Mail Ballot Dropoff</strong><ul class="voting-popup-hours">';
-    schedule.forEach(function (entry) {
-        html += '<li><span class="voting-popup-date">' + entry.date + '</span> ' + entry.hours + '</li>';
-    });
-    html += '</ul></div>';
-    return html;
+    return buildScheduleSectionHtml('Mail Ballot Dropoff', schedule);
 }
 
 function createVotingIcon(type) {
@@ -127,13 +176,7 @@ function buildVotingPopup(location) {
     const typeLabel = votingTypeLabels[location.type] || 'Voting Location';
     let hoursHtml = '';
 
-    if (location.schedule && location.schedule.length > 0) {
-        hoursHtml += '<div class="voting-popup-section"><strong>Early Voting Hours</strong><ul class="voting-popup-hours">';
-        location.schedule.forEach(function (entry) {
-            hoursHtml += '<li><span class="voting-popup-date">' + entry.date + '</span> ' + entry.hours + '</li>';
-        });
-        hoursHtml += '</ul></div>';
-    }
+    hoursHtml += buildScheduleSectionHtml('Early Voting Hours', location.schedule);
 
     if (location.electionDay) {
         hoursHtml += '<div class="voting-popup-section"><strong>Election Day (Tuesday, June 9)</strong>';
@@ -237,7 +280,7 @@ function addMarkerEntry(marker, location) {
     return entry;
 }
 
-const popupMaxWidth = window.matchMedia('(max-width: 768px)').matches ? 224 : 320;
+const popupMaxWidth = window.matchMedia('(max-width: 768px)').matches ? 246 : 320;
 
 // Add voting location markers
 votingLocations.forEach(function (location) {
@@ -293,5 +336,10 @@ const bounds = districtLayer.getBounds();
 allMarkerEntries.forEach(function (entry) {
     bounds.extend([entry.location.lat, entry.location.lng]);
 });
-map.fitBounds(bounds, { padding: [30, 30] });
-map.once('moveend', spreadOverlappingMarkers);
+map.fitBounds(bounds, { padding: isMobileMap ? [22, 22] : [30, 30] });
+map.once('moveend', function () {
+    if (isMobileMap) {
+        map.setZoom(Math.min(map.getMaxZoom(), map.getZoom() + 0.5));
+    }
+    spreadOverlappingMarkers();
+});
