@@ -1078,9 +1078,13 @@ h1, h2, h3, h4, h5, h6 {
         padding-bottom: 3px;
     }
 
+    .voting-popup-details-summary {
+        font-size: 0.56rem;
+    }
+
     .leaflet-popup-content-wrapper {
         border-radius: 4px;
-        max-width: 224px !important;
+        max-width: 246px !important;
     }
 
     .leaflet-popup-content {
@@ -1241,6 +1245,30 @@ h1, h2, h3, h4, h5, h6 {
 
 .voting-popup-election {
     margin: 0;
+}
+
+.voting-popup-details {
+    margin-top: 6px;
+}
+
+.voting-popup-details-summary {
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-navy);
+    list-style: none;
+}
+
+.voting-popup-details-summary::-webkit-details-marker {
+    display: none;
+}
+
+.voting-popup-details[open] .voting-popup-details-summary {
+    margin-bottom: 6px;
+}
+
+.voting-popup-details .voting-popup-hours {
+    max-height: 140px;
 }
 
 .leaflet-popup-content-wrapper {
