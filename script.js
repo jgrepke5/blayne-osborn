@@ -1,6 +1,49 @@
 // Blayne Osborn Campaign Website JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
+
+    // Election thank-you popup (first visit per session)
+    const thankyouPopup = document.getElementById('thankyou-popup');
+    const thankyouStorageKey = 'blayne-thankyou-dismissed';
+
+    function closeThankyouPopup() {
+        if (!thankyouPopup) return;
+        thankyouPopup.classList.remove('thankyou-popup-visible');
+        thankyouPopup.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('thankyou-popup-open');
+        try {
+            sessionStorage.setItem(thankyouStorageKey, '1');
+        } catch (err) { /* ignore */ }
+    }
+
+    function openThankyouPopup() {
+        if (!thankyouPopup) return;
+        thankyouPopup.classList.add('thankyou-popup-visible');
+        thankyouPopup.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('thankyou-popup-open');
+    }
+
+    if (thankyouPopup) {
+        let dismissed = false;
+        try {
+            dismissed = sessionStorage.getItem(thankyouStorageKey) === '1';
+        } catch (err) { /* ignore */ }
+
+        if (!dismissed) {
+            window.setTimeout(openThankyouPopup, 400);
+        }
+
+        const thankyouOverlay = thankyouPopup.querySelector('.thankyou-popup-overlay');
+        const thankyouCloseBtn = thankyouPopup.querySelector('.thankyou-popup-close');
+        if (thankyouOverlay) thankyouOverlay.addEventListener('click', closeThankyouPopup);
+        if (thankyouCloseBtn) thankyouCloseBtn.addEventListener('click', closeThankyouPopup);
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && thankyouPopup.classList.contains('thankyou-popup-visible')) {
+                closeThankyouPopup();
+            }
+        });
+    }
     
     // Mobile Navigation Toggle
     const navToggle = document.getElementById('nav-toggle');
