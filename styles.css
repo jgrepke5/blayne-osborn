@@ -47,6 +47,10 @@ body {
     background-color: var(--color-white);
 }
 
+body.thankyou-popup-open {
+    overflow: hidden;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -734,6 +738,281 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ===================================
+   ELECTION THANK YOU POPUP
+   =================================== */
+.thankyou-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.thankyou-popup.thankyou-popup-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.thankyou-popup-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(20, 45, 71, 0.75);
+}
+
+.thankyou-popup-content {
+    position: relative;
+    background: transparent;
+    color: var(--color-text);
+    max-width: 720px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+}
+
+.thankyou-popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    background: rgba(255, 255, 255, 0.92);
+    font-size: 1.75rem;
+    line-height: 1;
+    color: var(--color-gray-dark);
+    cursor: pointer;
+    border-radius: 50%;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.thankyou-popup-close:hover {
+    color: var(--color-navy);
+    background-color: var(--color-white);
+}
+
+.thankyou-popup-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.thankyou-star {
+    position: absolute;
+    color: var(--color-red);
+    opacity: 0.18;
+    line-height: 1;
+}
+
+.thankyou-star-1 {
+    top: 18px;
+    left: 24px;
+    font-size: 2rem;
+}
+
+.thankyou-star-2 {
+    bottom: 28px;
+    left: 42%;
+    font-size: 1.25rem;
+}
+
+.thankyou-star-3 {
+    top: 36%;
+    left: 38%;
+    font-size: 1.5rem;
+    opacity: 0.12;
+}
+
+.thankyou-popup-body {
+    position: relative;
+    z-index: 2;
+    min-height: 340px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(
+        to right,
+        #f7f9fc 0%,
+        #f7f9fc 34%,
+        #e4ebf2 44%,
+        #c5d2de 52%,
+        #9aafc0 60%,
+        #6d879c 68%,
+        #4a6680 76%,
+        #355570 84%,
+        var(--color-navy) 93%,
+        var(--color-navy-dark) 100%
+    );
+}
+
+.thankyou-popup-text {
+    position: relative;
+    z-index: 2;
+    width: 56%;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 10px 36px 28px;
+}
+
+.thankyou-popup-text > * {
+    position: relative;
+    z-index: 1;
+}
+
+.thankyou-popup-logo {
+    width: min(300px, 92%);
+    height: auto;
+    margin-bottom: 22px;
+}
+
+.thankyou-popup-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.65rem, 4vw, 2.1rem);
+    line-height: 1.2;
+    margin: 0 0 22px 0;
+    color: var(--color-navy);
+}
+
+.thankyou-popup-badge {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 14px 28px 12px;
+    background: linear-gradient(180deg, var(--color-red) 0%, var(--color-red-dark) 100%);
+    color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(155, 35, 53, 0.35);
+    overflow: hidden;
+}
+
+.thankyou-popup-badge-ribbon {
+    position: absolute;
+    top: 0;
+    left: -20%;
+    width: 140%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+}
+
+.thankyou-popup-badge-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.thankyou-popup-badge-label::before,
+.thankyou-popup-badge-label::after {
+    content: '★';
+    font-size: 0.9em;
+    line-height: 1;
+    opacity: 0.9;
+    transform: translateY(-0.04em);
+}
+
+.thankyou-popup-badge-sub {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.92;
+}
+
+.thankyou-popup-photo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 44%;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.thankyou-popup-photo img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 32% 18%;
+    transform: none;
+    mix-blend-mode: screen;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+@media (max-width: 640px) {
+    .thankyou-popup-body {
+        display: flex;
+        flex-direction: column-reverse;
+        min-height: 0;
+        background: linear-gradient(
+            to bottom,
+            var(--color-navy-dark) 0%,
+            var(--color-navy) 12%,
+            #3d5870 22%,
+            #688498 32%,
+            #95a9ba 42%,
+            #c0ced9 52%,
+            #dde5ec 62%,
+            #eef2f7 72%,
+            #f7f9fc 82%,
+            #f7f9fc 100%
+        );
+    }
+
+    .thankyou-popup-text {
+        width: 100%;
+        min-height: 0;
+        padding: 28px 24px 32px;
+    }
+
+    .thankyou-popup-logo {
+        width: min(280px, 94%);
+    }
+
+    .thankyou-popup-photo {
+        position: relative;
+        width: 100%;
+        height: 220px;
+    }
+
+    .thankyou-popup-photo img {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 72%;
+        height: 100%;
+        object-position: 32% 12%;
+    }
+
+    .thankyou-star-2 {
+        left: 72%;
+        bottom: auto;
+        top: 48%;
+    }
+}
+
+/* ===================================
    DONATE SECTION
    =================================== */
 .donate {
@@ -999,13 +1278,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 12px;
 }
 
-.district-map-note {
-    text-align: center;
-    font-size: 0.95rem;
-    color: var(--color-gray-dark);
-    margin-bottom: 24px;
-}
-
 #map {
     width: 100%;
     height: 500px;
@@ -1017,28 +1289,6 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 768px) {
     .district-map #map {
         height: 580px;
-    }
-
-    .map-legend {
-        padding: 8px 10px;
-        font-size: 0.56rem;
-        line-height: 1.3;
-        border-radius: 4px;
-    }
-
-    .map-legend-title {
-        margin-bottom: 6px;
-        font-size: 0.595rem;
-    }
-
-    .map-legend-item {
-        gap: 6px;
-        margin-bottom: 4px;
-    }
-
-    .map-legend-swatch {
-        width: 8px;
-        height: 8px;
     }
 
     .voting-popup {
@@ -1119,49 +1369,7 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
-.map-legend {
-    background: var(--color-white);
-    padding: 12px 14px;
-    border-radius: 6px;
-    box-shadow: var(--shadow-md);
-    font-size: 0.8rem;
-    line-height: 1.4;
-    color: var(--color-text);
-}
-
-.map-legend-title {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 0.85rem;
-    color: var(--color-navy);
-}
-
-.map-legend-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
-}
-
-.map-legend-item:last-child {
-    margin-bottom: 0;
-}
-
-.map-legend-swatch {
-    flex-shrink: 0;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-}
-
-.map-legend-mail {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 3px;
-    background-color: var(--color-white);
-}
+/* Map key styles archived — see archive/voting-locations/map-legend.css */
 
 .mail-marker-wrapper {
     background: transparent;
