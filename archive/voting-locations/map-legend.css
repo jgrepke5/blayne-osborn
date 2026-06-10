@@ -1,0 +1,70 @@
+/* Archived styles for the voting locations map key.
+   Restore: link this file in index.html or copy into styles.css when pins return. */
+
+.map-legend {
+    background: var(--color-white);
+    padding: 12px 14px;
+    border-radius: 6px;
+    box-shadow: var(--shadow-md);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--color-text);
+}
+
+.map-legend-title {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: var(--color-navy);
+}
+
+.map-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.map-legend-item:last-child {
+    margin-bottom: 0;
+}
+
+.map-legend-swatch {
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.map-legend-mail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    background-color: var(--color-white);
+}
+
+@media (max-width: 768px) {
+    .map-legend {
+        padding: 8px 10px;
+        font-size: 0.56rem;
+        line-height: 1.3;
+        border-radius: 4px;
+    }
+
+    .map-legend-title {
+        margin-bottom: 6px;
+        font-size: 0.595rem;
+    }
+
+    .map-legend-item {
+        gap: 6px;
+        margin-bottom: 4px;
+    }
+
+    .map-legend-swatch {
+        width: 8px;
+        height: 8px;
+    }
+}
