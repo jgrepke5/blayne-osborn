@@ -458,7 +458,6 @@
         <div class="container">
             <h2 class="section-title">Assembly District 39</h2>
             <p class="district-description">Proudly representing Lyon and Douglas Counties</p>
-            <p class="district-map-note">Click a pin to view voting location details and hours. All in-person voting locations will also serve as mail-ballot drop-off locations during active voting times. Check Election Day Only locations for additional mail ballot drop-off times.</p>
             <div id="map"></div>
         </div>
     </section>
@@ -498,6 +497,33 @@
             </div>
         </div>
     </footer>
+
+    <!-- Election Thank You Popup (shown on first visit) -->
+    <div id="thankyou-popup" class="thankyou-popup" aria-hidden="true" role="dialog" aria-labelledby="thankyou-popup-title" aria-modal="true">
+        <div class="thankyou-popup-overlay"></div>
+        <div class="thankyou-popup-content">
+            <button type="button" class="thankyou-popup-close" aria-label="Close">×</button>
+            <div class="thankyou-popup-stars" aria-hidden="true">
+                <span class="thankyou-star thankyou-star-1">★</span>
+                <span class="thankyou-star thankyou-star-2">★</span>
+                <span class="thankyou-star thankyou-star-3">★</span>
+            </div>
+            <div class="thankyou-popup-body">
+                <div class="thankyou-popup-text">
+                    <img src="images/logo.png" alt="Blayne Osborn for Nevada Assembly 39" class="thankyou-popup-logo">
+                    <h2 id="thankyou-popup-title" class="thankyou-popup-title">Thank You<br>Assembly District 39</h2>
+                    <div class="thankyou-popup-badge">
+                        <span class="thankyou-popup-badge-ribbon" aria-hidden="true"></span>
+                        <span class="thankyou-popup-badge-label">WON</span>
+                        <span class="thankyou-popup-badge-sub">Republican Primary Election</span>
+                    </div>
+                </div>
+                <div class="thankyou-popup-photo">
+                    <img src="images/blayne-thank-you.png" alt="Assemblyman Blayne Osborn">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Thank You / Donate Popup (shown after form submit) -->
     <div id="support-popup" class="support-popup" aria-hidden="true">
