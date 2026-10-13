@@ -134,7 +134,7 @@ function getSupplementalMailSchedule(votingLocation, mailLocation) {
         return [];
     }
     return mailLocation.schedule.filter(function (entry) {
-        if (/june 9/i.test(entry.date)) {
+        if (/november 3/i.test(entry.date)) {
             return false;
         }
         if (isClosedHours(entry.hours)) {
@@ -179,7 +179,7 @@ function buildVotingPopup(location) {
     hoursHtml += buildScheduleSectionHtml('Early Voting Hours', location.schedule);
 
     if (location.electionDay) {
-        hoursHtml += '<div class="voting-popup-section"><strong>Election Day (Tuesday, June 9)</strong>';
+        hoursHtml += '<div class="voting-popup-section"><strong>Election Day (Tuesday, November 3)</strong>';
         hoursHtml += '<p class="voting-popup-election">' + location.electionDay + '</p></div>';
     }
 
@@ -308,7 +308,28 @@ mailBallotDropoffLocations.forEach(function (location) {
 
 map.on('zoomend moveend', spreadOverlappingMarkers);
 
-// Map key archived — see archive/voting-locations/map-legend.js
+// Map key
+const legend = L.control({ position: 'bottomright' });
+legend.onAdd = function () {
+    const div = L.DomUtil.create('div', 'map-legend');
+    div.innerHTML = '<strong class="map-legend-title">Map Key</strong>';
+    Object.keys(votingTypeLabels).forEach(function (type) {
+        div.innerHTML +=
+            '<div class="map-legend-item">' +
+                '<span class="map-legend-swatch" style="background-color:' + votingTypeColors[type] + '"></span>' +
+                '<span>' + votingTypeLabels[type] + '</span>' +
+            '</div>';
+    });
+    div.innerHTML +=
+        '<div class="map-legend-item">' +
+            '<span class="map-legend-swatch map-legend-mail">' +
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="8" height="8" fill="#B45309"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5 8 5 8-5z"/></svg>' +
+            '</span>' +
+            '<span>Mail Ballot Dropoff Only</span>' +
+        '</div>';
+    return div;
+};
+legend.addTo(map);
 
 // Fit the map to show district and all locations
 const bounds = districtLayer.getBounds();
